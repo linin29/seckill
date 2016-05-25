@@ -10,7 +10,7 @@ create table seckill(
 `number` INT NOT NULL COMMENT '库存数量',
 `start_time` TIMESTAMP NOT NULL COMMENT '秒杀开启时间',
 `end_time` TIMESTAMP NOT NULL COMMENT '秒杀结束时间',
-`create_time` timestamp NOT NULL  COMMENT '创建时间',
+`create_time` TIMESTAMP NOT NULL  COMMENT '创建时间',
 PRIMARY KEY (seckill_id),
 KEY idx_start_time(start_time),
 KEY idx_end_time(end_time),

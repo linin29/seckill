@@ -1,8 +1,8 @@
 /**
- * <b>项目名：</b>区域教育信息化综合解决方案<br/>
- * <b>包   名：</b>com.glinin.seckill.entity<br/>
+ * <b>项目名：</b>秒杀活动<br/>
+ * <b>包    名：</b>com.glinin.seckill.entity<br/>
  * <b>文件名：</b>Seckill.java<br/>
- * <b>版本信息：</b>3.1<br/>
+ * <b>版本信息：</b>1.0<br/>
  * <b>日期：</b>2016年5月24日-下午2:21:11<br/>
  * 
  */
@@ -10,26 +10,48 @@ package com.glinin.seckill.entity;
 
 import java.util.Date;
 
-
 /**
  * <b>类 名：</b>Seckill<br/>
- * <b>类描述：</b>m<br/>
+ * <b>类描述：</b>秒杀活动实体类<br/>
  * <b>创建人：</b>ningli<br/>
  * <b>创建时间：</b>2016年5月24日 下午2:21:11<br/>
  * <b>修改人：</b>ningli<br/>
  * <b>修改时间：</b>2016年5月24日 下午2:21:11<br/>
  * <b>修改备注：</b><br/>
  * 
- * @version 3.1<br/>
+ * @version 1.0<br/>
  * 
  */
 public class Seckill
 {
+    /**
+     * seckillId:（秒杀活动id）
+     */
     private long seckillId;
+
+    /**
+     * name:（秒杀活动名称）
+     */
     private String name;
+
+    /**
+     * number:（数量）
+     */
     private int number;
+
+    /**
+     * startTime:（秒杀开始时间）
+     */
     private Date startTime;
+
+    /**
+     * endTime:（秒杀结束时间）
+     */
     private Date endTime;
+
+    /**
+     * createTime:（秒杀活动创建时间）
+     */
     private Date createTime;
 
     /**
@@ -151,7 +173,6 @@ public class Seckill
     {
         this.createTime = createTime;
     }
-
 
     @Override
     public String toString()

@@ -1,15 +1,14 @@
 /**
- * <b>项目名：</b>区域教育信息化综合解决方案<br/>
- * <b>包   名：</b>com.glinin.seckill.entity<br/>
+ * <b>项目名：</b>秒杀活动<br/>
+ * <b>包    名：</b>com.glinin.seckill.entity<br/>
  * <b>文件名：</b>SuccessKilled.java<br/>
- * <b>版本信息：</b>3.1<br/>
+ * <b>版本信息：</b>1.0<br/>
  * <b>日期：</b>2016年5月24日-下午2:40:29<br/>
  * 
  */
 package com.glinin.seckill.entity;
 
 import java.util.Date;
-
 
 /**
  * <b>类 名：</b>SuccessKilled<br/>
@@ -20,15 +19,34 @@ import java.util.Date;
  * <b>修改时间：</b>2016年5月24日 下午2:40:29<br/>
  * <b>修改备注：</b><br/>
  * 
- * @version 3.1<br/>
+ * @version 1.0<br/>
  * 
  */
 public class SuccessKilled
 {
+    /**
+     * seckillId:（秒杀活动id）
+     */
     private long seckillId;
+
+    /**
+     * userPhone:（用户手机号码）
+     */
     private long userPhone;
+
+    /**
+     * state:（秒杀的状态）
+     */
     private short state;
+
+    /**
+     * createTime:（创建时间）
+     */
     private Date createTime;
+
+    /**
+     * seckill:（秒杀活动实体类）
+     */
     private Seckill seckill;
 
     /**
@@ -111,18 +129,9 @@ public class SuccessKilled
         this.createTime = createTime;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString()
-    {
-        return "SuccessKilled [seckillId=" + seckillId + ", userPhone=" + userPhone + ", state=" + state + ", createTime=" + createTime + "]";
-    }
-
     /**
      * 取得 seckill
-     *
+     * 
      * @return seckill
      */
     public Seckill getSeckill()
@@ -132,11 +141,17 @@ public class SuccessKilled
 
     /**
      * 设置 seckill
-     *
+     * 
      * @param seckill
      */
     public void setSeckill(Seckill seckill)
     {
         this.seckill = seckill;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "SuccessKilled [seckillId=" + seckillId + ", userPhone=" + userPhone + ", state=" + state + ", createTime=" + createTime + "]";
     }
 }
