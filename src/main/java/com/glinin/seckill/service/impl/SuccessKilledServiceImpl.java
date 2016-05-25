@@ -1,12 +1,14 @@
 /**
  * <b>项目名：</b>秒杀活动<br/>
- * <b>包   名：</b>com.glinin.seckill.service.impl<br/>
+ * <b>包  名：</b>com.glinin.seckill.service.impl<br/>
  * <b>文件名：</b>SuccessKilledServiceImpl.java<br/>
  * <b>版本信息：</b>1.0<br/>
  * <b>日期：</b>2016年5月25日-下午1:33:10<br/>
  * 
  */
 package com.glinin.seckill.service.impl;
+
+import org.springframework.stereotype.Service;
 
 import com.glinin.seckill.service.SuccessKilledService;
 
@@ -22,6 +24,7 @@ import com.glinin.seckill.service.SuccessKilledService;
  * @version 1.0<br/>
  * 
  */
+@Service
 public class SuccessKilledServiceImpl implements SuccessKilledService
 {
 

@@ -1,6 +1,6 @@
 /**
  * <b>项目名：</b>秒杀活动<br/>
- * <b>包    名：</b>com.glinin.seckill.entity<br/>
+ * <b>包  名：</b>com.glinin.seckill.entity<br/>
  * <b>文件名：</b>Seckill.java<br/>
  * <b>版本信息：</b>1.0<br/>
  * <b>日期：</b>2016年5月24日-下午2:21:11<br/>

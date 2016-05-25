@@ -1,6 +1,6 @@
 /**
  * <b>项目名：</b>秒杀活动<br/>
- * <b>包    名：</b>com.glinin.seckill.service<br/>
+ * <b>包  名：</b>com.glinin.seckill.service<br/>
  * <b>文件名：</b>SuccessKilledService.java<br/>
  * <b>版本信息：</b>1.0<br/>
  * <b>日期：</b>2016年5月25日-下午1:32:28<br/>
