@@ -28,7 +28,7 @@ var seckill = {
 						$.post(killUrl, {}, function(result) {
 							if (result && result['success']) {
 								var killResult = result['data'];
-								var state = killResult['state'];
+								//var state = killResult['state'];
 								var stateInfo = killResult['stateInfo'];
 								//œ‘ æ√Î…±Ω·π˚
 								node.html("<span class=''label label-success>"+stateInfo+"</span>");
@@ -118,7 +118,7 @@ var seckill = {
 					var nowTime=result['data'];
 					seckill.countdown(seckillId,nowTime,startTime,endTime);
 				}
-			})
+			});
 		}
 	}
-}
+};
