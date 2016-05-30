@@ -102,11 +102,12 @@ public class SeckillController
     {
         if (userPhone == null)
         {
-            return new SeckillResult<>(false, "Î´×¢²áÊÖ»úºÅÂë");
+            return new SeckillResult<SeckillExecution>(false, "Î´×¢²áÊÖ»úºÅÂë");
         }
         try
         {
-            SeckillExecution execution = seckillService.executeSeckill(seckillId, userPhone, md5);
+            //SeckillExecution execution = seckillService.executeSeckill(seckillId, userPhone, md5);
+            SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, userPhone, md5);
             return new SeckillResult<SeckillExecution>(true, execution);
         }
         catch (RepeatKillException e)

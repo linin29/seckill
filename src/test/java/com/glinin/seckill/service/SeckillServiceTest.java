@@ -78,4 +78,14 @@ public class SeckillServiceTest
         SeckillExecution execution = seckillService.executeSeckill(seckillId, userPhone, md5);
         logger.info("execution={}", execution);
     }
+    
+    @Test
+    public void TestExecuteSeckillProcedure() throws SecurityException, RepeatKillException, SeckillCloseException
+    {
+        long seckillId = 1003;
+        long userPhone = 1234566;
+        String md5 = "f226c6423d5143ef2ef0ca5fc05234bb";
+        SeckillExecution execution = seckillService.executeSeckillProcedure(seckillId, userPhone, md5);
+        logger.info("execution={}", execution.getState());
+    }
 }

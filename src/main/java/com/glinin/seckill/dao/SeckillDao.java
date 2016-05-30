@@ -10,6 +10,7 @@ package com.glinin.seckill.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -64,4 +65,14 @@ public interface SeckillDao
      * @author ningli
      */
     public List<Seckill> queryAll(@Param("offset") int offset, @Param("limit") int limit);
+
+    /**
+     * killByProcedure(使用存储过程进行秒杀活动)
+     * 
+     * @param paramMap 参数
+     * @exception
+     * @since 1.0
+     * @author ningli
+     */
+    public void killByProcedure(Map<String, Object> paramMap);
 }

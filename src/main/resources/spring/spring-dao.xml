@@ -40,4 +40,9 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 		<property name="basePackage" value="com.glinin.seckill.dao" />
 	</bean>
+	<!-- redis -->
+	<bean class="com.glinin.seckill.dao.cache.RedisDao">
+		<constructor-arg index="0" value="192.168.61.3"></constructor-arg>
+		<constructor-arg index="1" value="6379"></constructor-arg>
+	</bean>
 </beans>

@@ -9,8 +9,11 @@
 package com.glinin.seckill.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.util.DigestUtils;
 
 import com.glinin.seckill.dao.SeckillDao;
 import com.glinin.seckill.dao.SuccessKilledDao;
+import com.glinin.seckill.dao.cache.RedisDao;
 import com.glinin.seckill.dto.Exposer;
 import com.glinin.seckill.dto.SeckillExecution;
 import com.glinin.seckill.entity.Seckill;
@@ -57,9 +61,12 @@ public class SeckillServiceImpl implements SeckillService
 
     @Autowired
     private SeckillDao seckillDao;
-    
+
     @Autowired
     private SuccessKilledDao successKilledDao;
+
+    @Autowired
+    private RedisDao redisDao;
 
     @Override
     public List<Seckill> getSeckillList()
@@ -76,11 +83,21 @@ public class SeckillServiceImpl implements SeckillService
     @Override
     public Exposer exportSeckillUrl(long seckillId)
     {
-        Seckill seckill = seckillDao.queryById(seckillId);
+        // º”»Îª∫¥Ê
+        Seckill seckill = redisDao.getSeckill(seckillId);
         if (seckill == null)
         {
-            return new Exposer(false, seckillId);
+            seckill = seckillDao.queryById(seckillId);
+            if (seckill == null)
+            {
+                return new Exposer(false, seckillId);
+            }
+            else
+            {
+                redisDao.putSeckill(seckill);
+            }
         }
+
         Date startTime = seckill.getStartTime();
         Date endTime = seckill.getEndTime();
         Date nowTime = new Date();
@@ -104,17 +121,17 @@ public class SeckillServiceImpl implements SeckillService
         Date now = new Date();
         try
         {
-            int updateCount = seckillDao.reduceNumber(seckillId, now);
-            if (updateCount <= 0)
+            int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
+            if (insertCount <= 0)
             {
-                throw new SeckillCloseException("seckill is closed");
+                throw new RepeatKillException("seckill repeat");
             }
             else
             {
-                int insertCount = successKilledDao.insertSuccessKilled(seckillId, userPhone);
-                if (insertCount <= 0)
+                int updateCount = seckillDao.reduceNumber(seckillId, now);
+                if (updateCount <= 0)
                 {
-                    throw new RepeatKillException("seckill repeat");
+                    throw new SeckillCloseException("seckill is closed");
                 }
                 else
                 {
@@ -145,4 +162,38 @@ public class SeckillServiceImpl implements SeckillService
         return md5;
     }
 
+    @Override
+    public SeckillExecution executeSeckillProcedure(long seckillId, long userPhone, String md5) throws SecurityException, RepeatKillException,
+            SeckillCloseException
+    {
+        if (md5 == null || !md5.equals(getMD5(seckillId)))
+        {
+            return new SeckillExecution(seckillId, SeckillEnum.DATA_REWRITE);
+        }
+        Date killTime = new Date();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("seckillId", seckillId);
+        map.put("phone", userPhone);
+        map.put("killTime", killTime);
+        map.put("result", null);
+        try
+        {
+            seckillDao.killByProcedure(map);
+            int result = MapUtils.getInteger(map, "result", -2);
+            if (result == 1)
+            {
+                SuccessKilled successKilled = successKilledDao.queryByIdWithSeckill(seckillId, userPhone);
+                return new SeckillExecution(seckillId, SeckillEnum.SUCCESS, successKilled);
+            }
+            else
+            {
+                return new SeckillExecution(seckillId, SeckillEnum.stateof(result));
+            }
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage(), e);
+            return new SeckillExecution(seckillId, SeckillEnum.INNER_ERROR);
+        }
+    }
 }
