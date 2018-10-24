@@ -29,7 +29,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<dependency>
+1		<dependency>
 			<!-- 数据库相关依赖 -->
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -78,7 +78,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>4.3.7</version>
+			<version>4.3.17</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
